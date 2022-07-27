@@ -12,12 +12,13 @@ use App\Http\Controllers\Home\FooterController;
 use App\Http\Controllers\Home\ContactController;
 
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
 
  
 Route::controller(DemoController::class)->group(function () {
+    Route::get('/', 'HomeMain')->name('home');
     Route::get('/about', 'Index')->name('about.page')->middleware('check');
     Route::get('/contact', 'ContactMethod')->name('cotact.page');
 });
@@ -65,6 +66,7 @@ Route::controller(HomeSliderController::class)->middleware(['auth'])->group(func
     Route::post('/update/portfolio', 'UpdatePortfolio')->name('update.portfolio');
     Route::get('/delete/portfolio/{id}', 'DeletePortfolio')->name('delete.portfolio');
     Route::get('/portfolio/details/{id}', 'PortfolioDetails')->name('portfolio.details');
+    Route::get('/portfolio', 'HomePortfolio')->name('home.portfolio');
 });
 
 
@@ -113,6 +115,10 @@ Route::controller(ContactController::class)->group(function () {
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/services', function () {
+    return view('frontend.services');
+})->middleware(['auth'])->name('home.services');
 
 require __DIR__.'/auth.php';
 

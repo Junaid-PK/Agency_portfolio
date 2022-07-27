@@ -55,6 +55,11 @@ class PortfolioController extends Controller
         return redirect()->route('all.portfolio')->with($notification);
     }// End Method
 
+    public function HomePortfolio(){
+
+        $portfolio = Portfolio::latest()->get();
+        return view('frontend.portfolio',compact('portfolio'));
+       } // End Method 
 
 
 }
